@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>实现2d轮播图效果</title>
+    <link rel="stylesheet" type="text/css" href="./css/mycarousel.css">
+    <style type="text/css">
+    #carousel {
+        width: 640px;
+        height: 300px;
+        margin:0 auto;
+        border:1px solid #000;
+    }
+    
+    .carousel-item {
+        width: 200px;
+        height: 300px;
+    }
+    
+    .carousel-item {
+        margin-right: 20px;
+    }
+    
+    .item1 {
+        background-color: pink;
+    }
+    
+    .item2 {
+        background-color: red;
+    }
+    
+    .item3 {
+        background-color: yellow;
+    }
+    
+    .item4 {
+        background-color: blue;
+    }
+    
+    .item5 {
+        background-color: green;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="carousel" id="carousel">
+        <ul class="carousel-list">
+            <li class="carousel-item item1">1</li>
+            <li class="carousel-item item2">2</li>
+            <li class="carousel-item item3">3</li>
+            <li class="carousel-item item3">4</li>
+            <li class="carousel-item item3">5</li>
+        </ul>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/mycarousel.js"></script>
+    <script type="text/javascript">
+    $('#carousel').myCarousel({
+        slideSpace:20,
+        showSlideNum:3,
+        moveSlideNum:1
+    });
+    </script>
+</body>
+
+</html>

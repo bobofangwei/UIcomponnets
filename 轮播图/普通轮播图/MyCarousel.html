@@ -13,15 +13,6 @@
         border:1px solid #000;
     }
     
-    .carousel-item {
-        width: 200px;
-        height: 300px;
-    }
-    
-    .carousel-item {
-        margin-right: 20px;
-    }
-    
     .item1 {
         background-color: pink;
     }
@@ -50,17 +41,19 @@
             <li class="carousel-item item1">1</li>
             <li class="carousel-item item2">2</li>
             <li class="carousel-item item3">3</li>
-            <li class="carousel-item item3">4</li>
-            <li class="carousel-item item3">5</li>
+            <li class="carousel-item item4">4</li>
+            <li class="carousel-item item5">5</li>
         </ul>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="./js/mycarousel.js"></script>
     <script type="text/javascript">
     $('#carousel').myCarousel({
-        slideSpace:20,
+        slideSpace:10,
         showSlideNum:3,
-        moveSlideNum:1
+        moveSlideNum:1,
+        controls:false,
+        auto:true,
     });
     </script>
 </body>

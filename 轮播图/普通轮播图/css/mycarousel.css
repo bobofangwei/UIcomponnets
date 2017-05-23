@@ -6,4 +6,21 @@
 .carousel,.carousel-list{
     overflow: hidden;
 }
- 
+.carousel-horizontal .carousel-item{
+    float:left;
+}
+/*control*/
+.carousel-horizontal .carousel-control{
+    position: absolute;
+    font-size:3em;
+    top:50%;
+    transform:translateY(-50%);
+    padding:10px;
+    cursor:pointer;
+}
+.carousel-horizontal .carousel-control.prev{
+    left:0;
+}
+.carousel-horizontal .carousel-control.next{
+    right:0;
+}

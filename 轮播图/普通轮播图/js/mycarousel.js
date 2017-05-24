@@ -35,7 +35,7 @@
                 this.__initControlEvent();
             }
             this.__initUlEvent();
-            
+
             if (this.settings.auto) {
                 this.__autoPlay();
                 var self = this;
@@ -66,6 +66,12 @@
             } else {
                 //竖屏
                 this.$elem.addClass('carousel-vertical');
+                var singleHeight = ((this.$elem.height() - this.settings.slideSpace * (this.settings.showSlideNum - 1)) / this.settings.showSlideNum).toFixed(2);
+                for (var i = 0, len = this.lis.length; i < len; i++) {
+                    this.lis[i].style.height = singleHeight + 'px';
+                    this.lis[i].style.width = '100%';
+                    this.lis[i].style.marginBottom = this.settings.slideSpace + 'px';
+                }
                 this.itemHeight = this.lis[0].clientHeight + this.settings.slideSpace;
                 this.$ul.height(this.itemHeight * this.slideCount);
             }
@@ -157,7 +163,12 @@
             this.runningDirection = 'prev';
             this.__cloneAndAddNode(this.runningDirection);
             //在动画开始之前，先移动列表的位置
-            this.$ul.css('transform', 'translateX(-' + this.settings.moveSlideNum * this.itemWith + 'px)');
+            if (this.direction) {
+                this.$ul.css('transform', 'translateX(-' + this.settings.moveSlideNum * this.itemWith + 'px)');
+            } else {
+                this.$ul.css('transform', 'translateY(-' + this.settings.moveSlideNum * this.itemHeight + 'px)');
+            }
+
             this.__setUlLength();
             this.$ul.css('transition', 'transform ' + this.settings.scrollSpeed + 'ms ' + this.settings.easing);
             if (this.direction) {

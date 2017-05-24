@@ -10,17 +10,31 @@
     float:left;
 }
 /*control*/
-.carousel-horizontal .carousel-control{
-    position: absolute;
+.carousel-control{
+    position:absolute;
     font-size:3em;
+    padding:10px;
+    cursor:pointer; 
+    line-height:1;  
+}
+.carousel-horizontal .carousel-control{
     top:50%;
     transform:translateY(-50%);
-    padding:10px;
-    cursor:pointer;
 }
 .carousel-horizontal .carousel-control.prev{
     left:0;
 }
 .carousel-horizontal .carousel-control.next{
     right:0;
+}
+.carousel-vertical .carousel-control{
+    left:50%;
+}
+.carousel-vertical .carousel-control.prev{
+    top:0;
+    transform: translateX(-50%) rotate(90deg);
+}
+.carousel-vertical .carousel-control.next{
+    bottom:0;
+    transform: translateX(-50%) rotate(90deg);
 }

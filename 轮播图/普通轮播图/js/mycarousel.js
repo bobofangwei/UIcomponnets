@@ -2,7 +2,7 @@
     var MyCarousel = {
         setup: function($elem, options) {
             this.$elem = $elem;
-            this.settings = $.extend(true, $.fn.myCarousel.default, options);
+            this.settings = $.extend(true, {}, $.fn.myCarousel.default, options);
             this.init();
         },
         //初始化dom元素
@@ -93,10 +93,11 @@
         __initControlEvent: function() {
             var self = this;
             this.$prevControl.on('click', function(e) {
+                console.log('prev');
                 self.prev();
             });
             this.$nextControl.on('click', function(e) {
-                console.log('next');
+                // console.log('next');
                 self.next();
             });
         },
@@ -202,12 +203,12 @@
         }
     };
     $.fn.myCarousel = function(options) {
-        return this.each(function() {
+        return $(this).each(function() {
             var $this = $(this);
-            var instance = $this.data('mycarousel');
+            instance = $this.data('mycarousel');
             if (!instance) {
                 instance = Object.create(MyCarousel);
-                MyCarousel.setup($this, options);
+                instance.setup($this, options);
                 $this.data('mycarousel', instance);
             }
         });

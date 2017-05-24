@@ -222,7 +222,6 @@
         scrollSpeed: 500, //滚动速度，默认500ms
         easing: 'linear', //动画缓动动画，默认为ease
         direction: 'horizontal', //水平方向滑动还是竖直方向，可选的有['horizontal','vertical']
-        index: 0, //初始的时候显示第几屏，默认为0
         showSlideNum: 1, //显示li的个数
         moveSlideNum: 1, //移动li的个数
         auto: false, //是否自动滚动，默认为false

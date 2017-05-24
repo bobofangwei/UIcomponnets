@@ -12,13 +12,17 @@
             //经过测试发现，使用find,querySelectorAll获得的Nodelist是静态的
             //this.$lis = this.$elem.find(this.settings.carouselItemSelector);
             //this.lis=this.$elem[0].querySelectorAll(this.settings.carouselItemSelector);
-            //getElementsByTagName获得的则是动态的NodeList
+            //getElementsByClassName获得的则是动态的NodeList
             //在本程序中，需要根据li的动态改变调整幻灯片列表的长度，因此需要其为动态的
-            this.lis = this.$elem[0].getElementsByTagName('li');
+            this.lis = this.$elem[0].getElementsByClassName(this.settings.carouselItemSelector.slice(1));
 
             //幻灯片滑动方向，默认为水平方向
             this.direction = this.settings.direction === 'horizontal' ? true : false;
             this.slideCount = this.getSlideCount();
+            //当前幻灯片的索引，取值为0-slideCount
+            this.curIndex = 0;
+            //记录每次滑动要滑动的幻灯片个数
+            this.moveSlideNum = this.settings.moveSlideNum;
 
             //三个取值
             //undefined：代表动画未在执行
@@ -35,6 +39,10 @@
                 this.__initControlEvent();
             }
             this.__initUlEvent();
+
+            if (this.settings.navigation) {
+                this.__initNavigation();
+            }
 
             if (this.settings.auto) {
                 this.__autoPlay();
@@ -109,8 +117,42 @@
                 self.__removeNode(self.runningDirection);
                 self.__setUlLength();
                 self.$ul.css('transform', 'translateX(0)');
+                if (self.runningDirection === 'prev') {
+                    self.curIndex = self.curIndex - self.moveSlideNum > 0 ? (self.curIndex - self.moveSlideNum) : (self.curIndex - self.moveSlideNum) % self.slideCount + self.slideCount;
+                } else {
+                    self.curIndex = (self.curIndex + self.moveSlideNum) % self.slideCount;
+
+                }
                 self.runningDirection = undefined;
+                self.moveSlideNum = self.settings.moveSlideNum;
+                // 动画结束时，设置curIndex才有意义，别忘了这是个异步的过程
+                console.log('curIndex', self.curIndex);
             });
+        },
+        __initNavigation: function() {
+            var ol = document.createElement('ol');
+            ol.className = this.settings.navigationSelector.slice(1);
+            var str = '';
+            for (var i = 0; i < this.slideCount; i++) {
+                str += '<li data-index=' + i + '></li>'
+            }
+            ol.innerHTML = str;
+            this.$elem.append(ol);
+            var self = this;
+            var lis = ol.querySelectorAll('li');
+            ol.addEventListener('click', function(e) {
+                var target = e.target;
+                if (target.tagName.toLowerCase() === 'li') {
+                    for (var i = 0, len = lis.length; i < len; i++) {
+                        lis[i].className='';
+                    }
+                    self.gotoSlide(target.dataset.index);
+                    target.className = 'active';
+                }
+            });
+        },
+        renderNav:function(){
+            
         },
         __autoPlay: function() {
             var self = this;
@@ -129,12 +171,12 @@
         __cloneAndAddNode: function(direction) {
             if (direction === 'next') {
                 //向前滑动
-                for (var i = 0; i < this.settings.moveSlideNum; i++) {
+                for (var i = 0; i < this.moveSlideNum; i++) {
                     var tmp = this.lis[i].cloneNode(true);
                     this.$ul.append(tmp);
                 }
             } else {
-                for (var i = 1, len = this.lis.length; i <= this.settings.moveSlideNum; i++) {
+                for (var i = 1, len = this.lis.length; i <= this.moveSlideNum; i++) {
                     var tmp = this.lis[len - 1].cloneNode(true);
                     this.$ul.prepend(tmp);
                 }
@@ -143,20 +185,55 @@
         },
         __removeNode: function() {
             if (this.runningDirection === 'next') {
-                for (var i = 0; i < this.settings.moveSlideNum; i++) {
+                for (var i = 0; i < this.moveSlideNum; i++) {
                     this.$ul[0].removeChild(this.lis[0]);
                 }
             } else {
-                for (var i = 0; i < this.settings.moveSlideNum; i++) {
+                for (var i = 0; i < this.moveSlideNum; i++) {
                     this.$ul[0].removeChild(this.lis[this.lis.length - 1]);
                 }
             }
         },
         prev: function() {
+            if (this.runningDirection) {
+                return;
+            }
+            this.moveSlideNum = this.settings.moveSlideNum;
+            this.prevSlide();
+        },
+        next: function() {
+            if (this.runningDirection) {
+                return;
+            }
+            this.moveSlideNum = this.settings.moveSlideNum;
+            this.nextSlide();
+        },
+        //滑动到第几个幻灯片
+        //index为目标幻灯片的索引， 其取值为0——slideCount-1
+        gotoSlide: function(index) {
+            console.log('gotoSlide:' + index);
+            if (this.runningDirection) {
+                return;
+            }
+            if (index > this.curIndex) {
+                //如果目标索引大于当前索引
+                //则向后滑动
+                this.moveSlideNum = index - this.curIndex;
+                this.nextSlide();
+            } else if (index < this.curIndex) {
+                //如果目标索引小于当前索引，则向前滑动
+                this.moveSlideNum = this.curIndex - index;
+                this.prevSlide();
+            }
+            //异步过程，只有动画结束的时候，修改curIndex才有意义
+            // this.curIndex = index;
+        },
+        //向前滑动indexSpace个幻灯片
+        prevSlide: function() {
             //向前滑动，实现无缝切换的原理与向后滑动类似
             //复制最后showSlideNum个幻灯片，添加到ul的最前面
             //滑动结束之后，删除最后showSlideNum个幻灯片
-
+            console.log('向前滑动' + this.moveSlideNum + '个幻灯片');
             //动画正在执行的时候，点击无效
             if (this.runningDirection) {
                 return;
@@ -165,9 +242,9 @@
             this.__cloneAndAddNode(this.runningDirection);
             //在动画开始之前，先移动列表的位置
             if (this.direction) {
-                this.$ul.css('transform', 'translateX(-' + this.settings.moveSlideNum * this.itemWith + 'px)');
+                this.$ul.css('transform', 'translateX(-' + this.moveSlideNum * this.itemWith + 'px)');
             } else {
-                this.$ul.css('transform', 'translateY(-' + this.settings.moveSlideNum * this.itemHeight + 'px)');
+                this.$ul.css('transform', 'translateY(-' + this.moveSlideNum * this.itemHeight + 'px)');
             }
 
             this.__setUlLength();
@@ -178,11 +255,13 @@
                 this.$ul.css('transform', 'translateY(0)');
             }
 
+
         },
-        next: function() {
+        //向后滑动indexSpace个幻灯片
+        nextSlide: function(indexSpace) {
             //为实现无缝切换，首先将moveSlideNum个幻灯片复制添加到列表尾部
             //滑动结束之后，再删除头部的moveSlideNum个幻灯片
-            console.log('next');
+            console.log('向后滑动' + this.moveSlideNum + '个幻灯片');
             if (this.runningDirection) {
                 return;
             }
@@ -192,11 +271,10 @@
             //滑动,使用css3的transform实现
             this.$ul.css('transition', 'transform ' + this.settings.scrollSpeed + 'ms ' + this.settings.easing);
             if (this.direction) {
-                this.$ul.css('transform', 'translateX(-' + this.settings.moveSlideNum * this.itemWith + 'px)');
+                this.$ul.css('transform', 'translateX(-' + this.moveSlideNum * this.itemWith + 'px)');
             } else {
-                this.$ul.css('transform', 'translateY(-' + this.settings.moveSlideNum * this.itemHeight + 'px)');
+                this.$ul.css('transform', 'translateY(-' + this.moveSlideNum * this.itemHeight + 'px)');
             }
-
         },
         getSlideCount: function() {
             return this.lis.length;
@@ -217,7 +295,8 @@
         carouselListSelector: '.carousel-list', //导航元素选择器
         carouselItemSelector: '.carousel-item',
         carouselControlSelector: '.carousel-control', //左右控制器按钮
-        navigation: true, //是否显示导航菜单，默认为true
+        navigation: false, //是否显示导航菜单，默认为true
+        navigationSelector: '.carousel-nav',
         controls: true, //是否显示左右播放控制按钮，默认为false
         scrollSpeed: 500, //滚动速度，默认500ms
         easing: 'linear', //动画缓动动画，默认为ease

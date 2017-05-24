@@ -1,3 +1,7 @@
+*{
+    margin:0;
+    padding:0;
+}
 .carousel-list{
     margin:0;
     padding:0;
@@ -26,6 +30,24 @@
 }
 .carousel-horizontal .carousel-control.next{
     right:0;
+}
+.carousel-horizontal .carousel-nav{
+    position:absolute;
+    bottom:10px;
+    left:50%;
+    transform:translateX(-50%);
+}
+.carousel-horizontal .carousel-nav li{
+    display: inline-block;
+    border-radius: 50%;
+    margin:0 5px;
+    width:10px;
+    height:10px;
+    background-color:#aaa;
+    cursor:pointer;
+}
+.carousel-horizontal .carousel-nav li:hover,.carousel-horizontal .carousel-nav li.active{
+    background-color:#fff;
 }
 .carousel-vertical .carousel-control{
     left:50%;

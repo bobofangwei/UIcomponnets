@@ -69,18 +69,19 @@
     <script type="text/javascript">
     var a=$('#carouselHorizontal').myCarousel({
         slideSpace: 10,
-        showSlideNum: 3,
-        moveSlideNum: 3,
-        controls: true,
-    });
-    var b=$('#carouselVertical').myCarousel({
-        slideSpace: 0,
         showSlideNum: 1,
-        moveSlideNum: 1,
-        controls: false,
-        direction: 'vertical',
-        auto: true
+        moveSlideNum: 2,
+        controls: true,
+        navigation:true,
     });
+    // var b=$('#carouselVertical').myCarousel({
+    //     slideSpace: 0,
+    //     showSlideNum: 1,
+    //     moveSlideNum: 1,
+    //     controls: false,
+    //     direction: 'vertical',
+    //     auto: true
+    // });
     console.log(a===b);
     </script>
 </body>

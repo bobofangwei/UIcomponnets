@@ -48,20 +48,20 @@
     <h1>水平轮播图示意</h1>
     <div class="carousel" id="carouselHorizontal">
         <ul class="carousel-list">
-            <li class="carousel-item item1">1</li>
-            <li class="carousel-item item2">2</li>
-            <li class="carousel-item item3">3</li>
-            <li class="carousel-item item4">4</li>
-            <li class="carousel-item item5">5</li>
+            <li class="carousel-item item1">0</li>
+            <li class="carousel-item item2">1</li>
+            <li class="carousel-item item3">2</li>
+            <li class="carousel-item item4">3</li>
+            <li class="carousel-item item5">4</li>
         </ul>
     </div>
     <hr>
     <h1>竖直自动播放轮播图示意</h1>
     <div class="carousel" id="carouselVertical">
         <ul class="carousel-list">
-            <li class="carousel-item item1">1</li>
-            <li class="carousel-item item2">2</li>
-            <li class="carousel-item item3">3</li>
+            <li class="carousel-item item1">0</li>
+            <li class="carousel-item item2">1</li>
+            <li class="carousel-item item3">2</li>
         </ul>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -69,20 +69,20 @@
     <script type="text/javascript">
     var a=$('#carouselHorizontal').myCarousel({
         slideSpace: 10,
-        showSlideNum: 1,
-        moveSlideNum: 2,
+        showSlideNum: 3,
+        moveSlideNum: 1,
         controls: true,
-        navigation:true,
+        navigation:false,
     });
-    // var b=$('#carouselVertical').myCarousel({
-    //     slideSpace: 0,
-    //     showSlideNum: 1,
-    //     moveSlideNum: 1,
-    //     controls: false,
-    //     direction: 'vertical',
-    //     auto: true
-    // });
-    console.log(a===b);
+    var b=$('#carouselVertical').myCarousel({
+        slideSpace: 0,
+        showSlideNum: 1,
+        moveSlideNum: 1,
+        controls: false,
+        direction: 'vertical',
+        auto: true,
+        navigation:true
+    });
     </script>
 </body>
 

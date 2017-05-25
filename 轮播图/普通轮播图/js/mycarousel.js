@@ -7,6 +7,7 @@
         },
         //初始化dom元素
         init: function() {
+            this.$elem.css('position', 'relative');
             this.$ul = this.$elem.find(this.settings.carouselListSelector);
 
             //经过测试发现，使用find,querySelectorAll获得的Nodelist是静态的
@@ -21,9 +22,11 @@
             this.slideCount = this.getSlideCount();
             //当前幻灯片的索引，取值为0-slideCount
             this.curIndex = 0;
-            //记录每次滑动要滑动的幻灯片个数
-            this.moveSlideNum = this.settings.moveSlideNum;
 
+            //记录每次滑动要滑动的幻灯片个数
+            //如果是左右滑动，那么就等于this.setting.moveSlideNum
+            //但如果是点击导航导致的滑动，滑动的方向和滑动的距离是不确定的
+            this.moveSlideNum = this.settings.moveSlideNum;
             //三个取值
             //undefined：代表动画未在执行
             //prev:代表向前的动画正在执行
@@ -38,10 +41,12 @@
                 //初始化控制按键中的响应事件
                 this.__initControlEvent();
             }
+            //添加滑动结束的监听事件
             this.__initUlEvent();
 
             if (this.settings.navigation) {
                 this.__initNavigation();
+                this.__initNavigationEvent();
             }
 
             if (this.settings.auto) {
@@ -55,6 +60,7 @@
                     self.__autoPlay();
                 });
             }
+            this.gotoSlide(this.settings.index);
         },
         __initLayout: function() {
             // console.log('transition', this.$ul.css('transition'));
@@ -86,7 +92,7 @@
         },
 
         __initControls: function() {
-            this.$elem.css('position', 'relative');
+            
             var prevControl = document.createElement('a');
             prevControl.innerHTML = '&lsaquo;';
             var nextControl = document.createElement('a');
@@ -105,7 +111,7 @@
                 self.prev();
             });
             this.$nextControl.on('click', function(e) {
-                // console.log('next');
+                console.log('next');
                 self.next();
             });
         },
@@ -117,16 +123,19 @@
                 self.__removeNode(self.runningDirection);
                 self.__setUlLength();
                 self.$ul.css('transform', 'translateX(0)');
-                if (self.runningDirection === 'prev') {
-                    self.curIndex = self.curIndex - self.moveSlideNum > 0 ? (self.curIndex - self.moveSlideNum) : (self.curIndex - self.moveSlideNum) % self.slideCount + self.slideCount;
-                } else {
-                    self.curIndex = (self.curIndex + self.moveSlideNum) % self.slideCount;
-
-                }
-                self.runningDirection = undefined;
-                self.moveSlideNum = self.settings.moveSlideNum;
                 // 动画结束时，设置curIndex才有意义，别忘了这是个异步的过程
-                console.log('curIndex', self.curIndex);
+                // if (self.runningDirection === 'prev') {
+                //     self.curIndex = self.curIndex - self.moveSlideNum >= 0 ? (self.curIndex - self.moveSlideNum) : (self.curIndex - self.moveSlideNum) % self.slideCount + self.slideCount;
+                // } else {
+                //     self.curIndex = (self.curIndex + self.moveSlideNum) % self.slideCount;
+
+                // }
+                //如果有导航的话，设置对应页面高亮
+                // self.renderNav(self.curIndex);
+
+                self.runningDirection = undefined;
+                // self.moveSlideNum = self.settings.moveSlideNum;
+                // console.log('curIndex', self.curIndex);
             });
         },
         __initNavigation: function() {
@@ -138,21 +147,20 @@
             }
             ol.innerHTML = str;
             this.$elem.append(ol);
+            this.$navBar = $(ol);
+            this.$navIndicators = this.$navBar.find('li');
+        },
+        __initNavigationEvent: function() {
             var self = this;
-            var lis = ol.querySelectorAll('li');
-            ol.addEventListener('click', function(e) {
-                var target = e.target;
-                if (target.tagName.toLowerCase() === 'li') {
-                    for (var i = 0, len = lis.length; i < len; i++) {
-                        lis[i].className='';
-                    }
-                    self.gotoSlide(target.dataset.index);
-                    target.className = 'active';
-                }
+            this.$navBar.on('click', 'li', function(e) {
+                self.gotoSlide(e.target.dataset.index);
             });
         },
-        renderNav:function(){
-            
+        __updateNav: function() {
+            console.log('index', this.curIndex);
+            if (this.settings.navigation) {
+                this.$navIndicators.eq(this.curIndex).addClass('active').siblings().removeClass('active');
+            }
         },
         __autoPlay: function() {
             var self = this;
@@ -194,27 +202,42 @@
                 }
             }
         },
+        //点击向前的箭头的事件处理函数
         prev: function() {
             if (this.runningDirection) {
                 return;
             }
             this.moveSlideNum = this.settings.moveSlideNum;
             this.prevSlide();
+            this.__updateIndex();
+            this.__updateNav();
         },
+        //点击向后的箭头的事件处理函数
         next: function() {
             if (this.runningDirection) {
                 return;
             }
             this.moveSlideNum = this.settings.moveSlideNum;
             this.nextSlide();
+            this.__updateIndex();
+            this.__updateNav();
         },
-        //滑动到第几个幻灯片
+        //获取向前，向后滑动后，要滑动到的幻灯片的索引
+        __updateIndex: function() {
+            if (this.runningDirection === 'prev') {
+                this.curIndex = this.curIndex - this.moveSlideNum >= 0 ? (this.curIndex - this.moveSlideNum) : (this.curIndex - this.moveSlideNum) % this.slideCount + this.slideCount;
+            } else {
+                this.curIndex = (this.curIndex + this.moveSlideNum) % this.slideCount;
+
+            }
+        },
+        //点击导航时的事件处理函数
         //index为目标幻灯片的索引， 其取值为0——slideCount-1
         gotoSlide: function(index) {
-            console.log('gotoSlide:' + index);
             if (this.runningDirection) {
                 return;
             }
+            console.log('gotoSlide:' + index);
             if (index > this.curIndex) {
                 //如果目标索引大于当前索引
                 //则向后滑动
@@ -225,10 +248,11 @@
                 this.moveSlideNum = this.curIndex - index;
                 this.prevSlide();
             }
-            //异步过程，只有动画结束的时候，修改curIndex才有意义
-            // this.curIndex = index;
+            this.curIndex = index;
+            this.__updateNav();
+
         },
-        //向前滑动indexSpace个幻灯片
+        //向前滑动this.moveSlideNum个幻灯片
         prevSlide: function() {
             //向前滑动，实现无缝切换的原理与向后滑动类似
             //复制最后showSlideNum个幻灯片，添加到ul的最前面
@@ -258,7 +282,7 @@
 
         },
         //向后滑动indexSpace个幻灯片
-        nextSlide: function(indexSpace) {
+        nextSlide: function() {
             //为实现无缝切换，首先将moveSlideNum个幻灯片复制添加到列表尾部
             //滑动结束之后，再删除头部的moveSlideNum个幻灯片
             console.log('向后滑动' + this.moveSlideNum + '个幻灯片');
@@ -305,6 +329,7 @@
         moveSlideNum: 1, //移动li的个数
         auto: false, //是否自动滚动，默认为false
         autoInterval: 2000, //当auto为ture时，设定自动播放动画的时间间隔，默认为2000ms
-        slideSpace: 0, //每个幻灯片之间的距离间隔，默认为0，单位是px        
+        slideSpace: 0, //每个幻灯片之间的距离间隔，默认为0，单位是px  
+        index: 0,
     };
 })(jQuery);

@@ -51,9 +51,9 @@
 * `autoInterval`:开启自动播放时，两帧动画之间的间隔，默认为2000，单位是ms
 * `scrollSpeed`:幻灯片速度，默认500，单位是毫秒  
 * `easing`: 幻灯片滑动的缓动函数，默认为linear  
-* `controls`: 是否显示播放控制元素，默认为true
-`slideSpace`: 相邻两个幻灯片的间隔，多用于当一屏显示多个幻灯片时，默认值为0，单位是px
-`navigation`: 是否显示导航的圆点，默认为false，建议在showSlideNum为1的时候可以考虑设置其为true  
+* `controls`: 是否显示播放控制元素，默认为true  
+`slideSpace`: 相邻两个幻灯片的间隔，多用于当一屏显示多个幻灯片时，默认值为0，单位是px  
+`navigation`: 是否显示导航的圆点，默认为false，建议在showSlideNum为1的时候可以考虑设置其为true    
 `index`:页面加载完成后，活动的幻灯片，默认为0，即第一张
 
 

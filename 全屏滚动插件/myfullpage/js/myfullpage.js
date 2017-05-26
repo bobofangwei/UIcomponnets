@@ -176,6 +176,7 @@
 
     };
     $.fn.MyFullPage = function(options) {
+        var instance;
         return this.each(function() {
             var me = $(this),
                 instance = me.data('MyFullpage');
@@ -186,6 +187,7 @@
                 instance.setup(me, options);
                 me.data('MyFullPage', instance);
             }
+            return instance;
         });
     };
     $.fn.MyFullPage.default = {

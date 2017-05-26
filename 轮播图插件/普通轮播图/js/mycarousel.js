@@ -305,7 +305,8 @@
         }
     };
     $.fn.myCarousel = function(options) {
-        return $(this).each(function() {
+        var instance;
+        $(this).each(function() {
             var $this = $(this);
             instance = $this.data('mycarousel');
             if (!instance) {
@@ -313,7 +314,9 @@
                 instance.setup($this, options);
                 $this.data('mycarousel', instance);
             }
+            return instance;
         });
+
     };
     $.fn.myCarousel.default = {
         carouselListSelector: '.carousel-list', //导航元素选择器

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>类似于fullpage的全屏滚动插件</title>
+    <link rel="stylesheet" type="text/css" href="../css/myfullpage.css">
+    <style type="text/css">
+    .section1 {
+        background-color: #9c9;
+    }
+    
+    .section2 {
+        background-color: #fc9;
+    }
+    
+    .section3 {
+        background-color: #cf9;
+    }
+    
+    .section4 {
+        background-color: #9cf;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div class="sections">
+            <div class="section section1"></div>
+            <div class="section section2"></div>
+            <div class="section section3"></div>
+            <div class="section section4"></div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/myfullpage.js"></script>
+    <script type="text/javascript">
+    $('#container').MyFullPage({
+        loop: true,
+        index: 1,
+        navigation: true,
+        keyboard: true,
+        onLeave: function(prevIndex, index, direction) {
+            console.log('从' + prevIndex + '个幻灯片滑动到第' + index + '个幻灯片，方向为' + direction);
+        },
+        onLoad: function(index) {
+            console.log('第' + index + '个幻灯片加载完毕');
+        }
+    });
+    </script>
+</body>
+
+</html>

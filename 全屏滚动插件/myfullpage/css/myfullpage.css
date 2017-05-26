@@ -1,0 +1,58 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+#container {
+    height: 100%;
+    /*设置该属性使得滚动条消失，注意该属性不能定义在sections上*/
+    overflow: hidden;
+}
+
+.sections,
+.section {
+    width: 100%;
+    height: 100%;
+}
+
+.nav-tabs {
+    position: fixed;
+    top: 50%;
+    right: 3%;
+    transform: translateY(-50%);
+    list-style-type: none;
+}
+
+.nav-tabs .nav-item {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    margin-bottom: 15px;
+    transition: transform 400ms linear;
+    cursor: pointer;
+}
+
+.sections-horizontal~.nav-tabs {
+    top: inherit;
+    right: inherit;
+    left: 50%;
+    bottom: 2%;
+    transform: translateX(-50%);
+}
+
+.sections-horizontal~.nav-tabs .nav-item {
+    float: left;
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+
+.nav-tabs .nav-item.active {
+    transform: scale(1.1);
+    background-color: #fff;
+}

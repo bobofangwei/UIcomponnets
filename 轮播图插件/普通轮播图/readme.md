@@ -4,7 +4,7 @@
 2. 丰富的配置项
 3. 基于css3实现动画效果
 
-[Demo](https://bobofangwei.github.io/UIcomponnets//%E8%BD%AE%E6%92%AD%E5%9B%BE/%E6%99%AE%E9%80%9A%E8%BD%AE%E6%92%AD%E5%9B%BE/demo/MyCarousel.html)
+[Demo](https://bobofangwei.github.io/UIcomponnets/%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%8F%92%E4%BB%B6/%E6%99%AE%E9%80%9A%E8%BD%AE%E6%92%AD%E5%9B%BE/demo/MyCarousel.html)
 
 ## 用法介绍
 ### 依赖文件
@@ -52,9 +52,9 @@
 * `scrollSpeed`:幻灯片速度，默认500，单位是毫秒  
 * `easing`: 幻灯片滑动的缓动函数，默认为linear  
 * `controls`: 是否显示播放控制元素，默认为true  
-`slideSpace`: 相邻两个幻灯片的间隔，多用于当一屏显示多个幻灯片时，默认值为0，单位是px  
-`navigation`: 是否显示导航的圆点，默认为false，建议在showSlideNum为1的时候可以考虑设置其为true    
-`index`:页面加载完成后，活动的幻灯片，默认为0，即第一张
+* `slideSpace`: 相邻两个幻灯片的间隔，多用于当一屏显示多个幻灯片时，默认值为0，单位是px  
+* `navigation`: 是否显示导航的圆点，默认为false，建议在showSlideNum为1的时候可以考虑设置其为true    
+* `index`:页面加载完成后，活动的幻灯片，默认为0，即第一张
 
 
 

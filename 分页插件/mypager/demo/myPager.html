@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>分页插件demo</title>
+    <style type="text/css">
+        .page-wrapper a{
+            float:left;
+            padding:5px 10px;
+            border:1px solid #ccc;
+            text-decoration: none;
+            margin-right:15px;
+            cursor:pointer;
+        }
+        .page-wrapper a.active{
+            font-weight:600;
+            color:#000;
+            border:none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="page-wrapper"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/myPager.js"></script>
+    <script type="text/javascript ">
+    $('#page-wrapper').myPager({
+        showPageCount:9,
+        allPageCount:15,        
+    });
+    </script>
+</body>
+
+</html>

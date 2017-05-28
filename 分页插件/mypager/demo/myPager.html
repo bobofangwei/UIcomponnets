@@ -5,19 +5,20 @@
     <meta charset="UTF-8">
     <title>分页插件demo</title>
     <style type="text/css">
-        .page-wrapper a{
-            float:left;
-            padding:5px 10px;
-            border:1px solid #ccc;
-            text-decoration: none;
-            margin-right:15px;
-            cursor:pointer;
-        }
-        .page-wrapper a.active{
-            font-weight:600;
-            color:#000;
-            border:none;
-        }
+    .page-wrapper a {
+        float: left;
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        text-decoration: none;
+        margin-right: 15px;
+        cursor: pointer;
+    }
+    
+    .page-wrapper a.active {
+        font-weight: 600;
+        color: #000;
+        border: none;
+    }
     </style>
 </head>
 
@@ -27,8 +28,11 @@
     <script src="../js/myPager.js"></script>
     <script type="text/javascript ">
     $('#page-wrapper').myPager({
-        showPageCount:9,
-        allPageCount:15,        
+        showPageCount: 9,
+        allPageCount: 15,
+        callback: function(curPage, allPage) {
+            console.log('现在是第' + curPage + '页，一共有' + allPage + '页');
+        }
     });
     </script>
 </body>

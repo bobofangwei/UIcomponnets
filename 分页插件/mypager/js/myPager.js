@@ -3,7 +3,7 @@
         setup: function(elem, opts) {
             this.$elem = elem;
             this.$elem.addClass('page-wrapper');
-            this.settings = $.extend(true, opts, $.fn.myPager.defaults);
+            this.settings = $.extend(true, {}, $.fn.myPager.defaults,opts);
             this.gotoPage(1);
             this.__initEvent();
         },
@@ -45,8 +45,11 @@
             if (this.settings.showEdge && this.curPage <= this.settings.allPageCount - half) {
                 this.__appendLink(fragment, this.settings.allPageCount, this.settings.endPage);
             }
-            
+
             this.$elem.append(fragment);
+            if (this.settings.callback) {
+                this.settings.callback.call(this, this.curPage, this.settings.allPageCount);
+            }
         },
         getPageCount: function() {
             return this.settings.pageCount;
@@ -68,8 +71,8 @@
                 var a = document.createElement('a');
                 a.index = i;
                 a.innerHTML = i;
-                if(i===this.curPage){
-                    a.className='active';
+                if (i === this.curPage) {
+                    a.className = 'active';
                 }
                 dom.append(a);
             }

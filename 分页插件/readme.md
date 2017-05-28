@@ -1,6 +1,6 @@
 # MyPager.js
 一个轻量级的jQuery分页插件，支持相关配置项  
-[Demo](https://bobofangwei.github.io/UIcomponnets/%E5%85%A8%E5%B1%8F%E6%BB%9A%E5%8A%A8%E6%8F%92%E4%BB%B6/myfullpage/demo/index.html)
+[Demo](hhttps://bobofangwei.github.io/UIcomponnets/%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6/mypager/demo/myPager.html)
 ## 用法介绍
 ### 一、文件依赖
 MyPager依赖于jQuery,需要首先引入jQuery文件

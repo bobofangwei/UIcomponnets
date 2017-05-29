@@ -4,7 +4,7 @@
 + 可配置树中节点的插入和删除
 + 初始化中可配置节点的展开/折叠状态等  
 
-[Demo](https://bobofangwei.github.io/UIcomponnets/%E5%85%A8%E5%B1%8F%E6%BB%9A%E5%8A%A8%E6%8F%92%E4%BB%B6/myfullpage/demo/index.html)
+[Demo](https://bobofangwei.github.io/UIcomponnets/树形组件插件/myTreeMenu/demo/index.html)
 ## 用法介绍
 ### 一、文件依赖
 MyTreeMenu.js依赖于
@@ -25,7 +25,7 @@ MyTreeMenu.js依赖于
 支持两种初始化方法  
 1. 静态构建  
 在初始化函数中传入数据参数，可以实现菜单树的静态构建，当然后续还可以通过调用接口增加/删除对应节点  
-示例[Domo]()中的树形菜单，如果使用静态构建的话，代码如下：
+示例[Domo](https://bobofangwei.github.io/UIcomponnets/树形组件插件/myTreeMenu/demo/index.html)中的树形菜单，如果使用静态构建的话，代码如下：
 ```
     var data = [{
         name: '前端技能栈',
@@ -73,7 +73,7 @@ MyTreeMenu.js依赖于
 ```
 2. 动态构建  
 初始化时参数为空，通过后续调用对应接口完成树状菜单的构建  
-示例[Domo]()中的树形菜单，如果使用动态构建的话，代码如下：
+示例[Domo](https://bobofangwei.github.io/UIcomponnets/树形组件插件/myTreeMenu/demo/index.html)中的树形菜单，如果使用动态构建的话，代码如下：
 ```
 var root=$('#tree-wrapper').myTreeMenu();
 root.addChild({name:'前端技能栈'}).addChild({name:'那些大牛们'});

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>树形组件实例</title>
+    <link rel="stylesheet" type="text/css" href="../css/myTreeMenu.css">
+    <style type="text/css">
+    body {
+        padding: 50px;
+        background-color: ;
+    }
+    
+    #tree-wrapper {
+        width: 250px;
+        border: 1px solid #999;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="tree-wrapper">
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/myTreeMenu.js"></script>
+    <script type="text/javascript">
+    var data = [{
+        name: '前端技能栈',
+        nodes: [{
+            name: '浏览器底层',
+            nodes: [{
+                name: 'javascript CORE'
+            }, {
+                name: 'javscript BOM'
+            }, {
+                name: 'javascript DOM'
+            }]
+        }, {
+            name: '框架层',
+            nodes: [{
+                name: 'jQuery',
+                href: 'http://jquery.com/',
+                spread: true,
+                nodes: [{
+                    name: 'DOM封装'
+                }, {
+                    name: 'Class封装'
+                }]
+            }]
+        }, {
+            name: '框架组件',
+            spread: false,
+            nodes: [{
+                name: '日历组件'
+            }, {
+                name: '树形菜单组件'
+            }]
+        }]
+    }, {
+        name: '那些大牛们',
+        spread: true,
+        nodes: [{
+            name: '尤雨溪'
+        }, {
+            name: '阮一峰',
+            href: 'http://www.ruanyifeng.com/blog/',
+        }]
+    }];
+    var root = $('#tree-wrapper').myTreeMenu(data);
+    //方法二
+    // var root=$('#tree-wrapper').myTreeMenu();
+    // root.addChild({name:'前端技能栈'}).addChild({name:'那些大牛们'});
+    // root.childs[0].addChild({name:'浏览器底层'}).addChild({name:'框架层'}).addChild({name:'框架组件'});
+    // root.childs[0].childs[0].addChild({name:'javascript CORE'}).addChild({name:'javascript BOM'}).addChild({name:'javscript:DOM'});
+    // root.childs[0].childs[1].addChild({name:'jQuery','href':'http://jquery.com/'});
+    // root.childs[0].childs[1].childs[0].addChild({name:'DOM封装'}).addChild({name:'Class封装'});
+    // root.childs[0].childs[2].addChild({name:'日历组件'}).addChild({name:'树形菜单组件'}).folder();
+    // root.childs[1].addChild({name:'尤雨溪'}).addChild({name:'阮一峰'}).spread();
+    </script>
+</body>
+
+</html>

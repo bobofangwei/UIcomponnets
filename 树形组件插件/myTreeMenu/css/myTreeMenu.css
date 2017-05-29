@@ -1,0 +1,58 @@
+.treemenu_list,
+.treemenu_item {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.treemenu_list {
+    padding-left: 20px;
+}
+
+.treemenu_list {
+    font-size: .9em;
+    font-family: 'Microsoft Yahei';
+    line-height: 1.8;
+}
+
+.treemenu_item a {
+    text-decoration: none;
+    color: #6898C2;
+}
+
+.treemenu_item {
+    cursor: pointer;
+}
+
+.treemenu_item .arrow {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    margin-right: 7px;
+}
+
+.treemenu_item .down_arrow {
+    border-width: 10px 7px 10px 7px;
+    border-color: #6898C2 transparent transparent;
+    border-style: solid;
+    margin-top: 7px;
+}
+
+.treemenu_item .right_arrow {
+    border-width: 7px 10px 7px 10px;
+    border-color: transparent transparent transparent #6898C2;
+    border-style: solid;
+    margin-right: -4px;
+}
+
+.operate {
+    margin-left: 20px;
+    display: none;
+}
+
+.operate span {
+    cursor: pointer;
+    padding: 0 5px;
+}

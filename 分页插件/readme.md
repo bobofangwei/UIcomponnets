@@ -6,6 +6,7 @@
 MyPager依赖于jQuery,需要首先引入jQuery文件
 ```
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script src="../js/myPager.js"></script>
 ```
 ### 二、html代码结构
 定义一个包围分页插件的父元素

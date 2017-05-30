@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>日历插件</title>
+    <link rel="stylesheet" type="text/css" href="../css/myDatePicker.css">
+    <style type="text/css">
+    .container {
+        width: 50%;
+        margin: 50px auto;
+        font-size: 14px;
+    }
+    
+    #selectDate,
+    #selectDuration {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        font-size: 1em;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>选择一个日期：</h1>
+        <p>可选范围为2017-5-10 —— 2017-6-20</p>
+        <input id="selectDate"></input>
+    </div>
+    <div class="container">
+        <h1>选择一个时间段：</h1>
+        <p>时间段最小跨度为3，最长跨度为5</p>
+        <input id="selectDuration"></input>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/myDatePicker.js"></script>
+    <script type="text/javascript">
+    var datePicker = $('#selectDate').myDatePicker({
+        startDate: '2017-5-10',
+        endDate: '2017-6-20',
+        daySelectedCallback: function(selectDate) {
+            console.log('你选择的日期是：' + selectDate);
+        }
+    });
+
+    var datePicker = $('#selectDuration').myDatePicker({
+        select: 'duration',
+        minDuration: 3,
+        maxDuration: 5,
+        durationSelectCallback: function(startDate,endDate) {
+            console.log('你选的起始日期是：' + startDate+ ',结束日期是：' + endDate);
+        }
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+.mydatepicker-wrapper{
+    width:210px;
+    font-size:12px;
+    font-family: 'Microsoft Yahei';
+    padding:5px;
+    border:1px solid #C7C7C7;
+    border-radius: 5px;
+    color:#000;
+    background-color:#fff;
+    position:absolute;
+}
+.mydatepicker-title_wrapper{
+    width:100%;
+    text-align: center;
+    font-weight:600;
+    height:25px;
+    line-height: 25px;
+    overflow: hidden;
+}
+.mydatepicker-prev,.mydatepicker-next{
+    padding:0 10px;
+    cursor:pointer;
+    font-size:16px;
+}
+.mydatepicker-prev{
+    float:left;
+    cursor:pointer;
+}
+.mydatepicker-next{
+    float:right;
+    cursor:pointer;
+}
+.mydatepicker-table{
+    width:100%;
+    text-align: center;
+    vertical-align: middle;
+}
+.mydatepicker-table th,.mydatepicker-table td{
+    padding:5px 0;
+}
+.mydatepicker-table td{
+    cursor:pointer;
+}
+ 
+.mydatepicker-table td.select,.mydatepicker-table td:hover{
+    background-color:#2BA6CB;
+}
+.mydatepicker-table td.disable{
+    color:#A2A2BF;
+    cursor:initial;
+}
+.mydatepicker-table td.induration{
+    background-color: rgba(199,199,199,.5);
+}
+.mydatepicker-table td.disable:hover{
+    background-color: #fff;
+}
+.myDatePicker-btn_wrapper{
+    text-align: center;
+    border-top:1px solid #C7C7C7;
+    padding:10px 0 0  5px;
+}
+.myDatePicker-btn_wrapper .button{
+    border:1px solid #C7C7C7;
+    margin:0 10px;
+    width:50px;
+    height:20px;
+    line-height: 20px;
+    font-size:12px;
+    background-color:#fff;
+    cursor:pointer;
+    border-radius: 3px;
+}
+.myDatePicker-btn_wrapper .button:hover{
+    background-color:#C7C7C7;
+}
+
+

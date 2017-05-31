@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>表单验证插件</title>
+    <style type="text/css">
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+    .f-right {
+        float: right;
+    }
+    
+    .form-wrapper {
+        padding: 50px 0;
+    }
+    
+    .input-group {
+        width: 400px;
+        margin: 0 auto;
+        position: relative;
+        padding: 5px 0;
+    }
+    
+    .input-group>input {
+        width: 100%;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 5px;
+        outline: none;
+        border: 2px solid #ccc;
+    }
+    
+    .input-group>label {
+        position: absolute;
+        text-align: right;
+        width: 200px;
+        left: -220px;
+    }
+    
+    .input-group>span {
+        font-size: .9em;
+        color: #999;
+    }
+    
+    .style1 span.tip {
+        display: block;
+        padding-top: 5px;
+    }
+    
+    .style1 .input-group {
+        width: 500px;
+    }
+    
+    .style2 .input-group {
+        width: 400px;
+    }
+    
+    .style2 span.tip {
+        position: absolute;
+        width: 200px;
+        right: -220px;
+        top: 0;
+        padding-top: 15px;
+    }
+    
+    .input-group input.correct {
+        border: 2px solid #5EBB48;
+    }
+    
+    span.tip.correct {
+        color: #5EBB48;
+    }
+    
+    .input-group input.error {
+        border: 2px solid red;
+    }
+    
+    span.tip.error {
+        color: red;
+    }
+    
+    .btn {
+        border: none;
+        border-radius: 5px;
+        padding: 5px 20px;
+        font-size: 1.1em;
+        cursor: pointer;
+    }
+    
+    .btn-primary {
+        color: #fff;
+        background-color: #2F79BA;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="form-wrapper">
+        <form action="" method="post" id="myForm" class="my-form">
+            <div class="input-group">
+                <label for="">名称</label>
+                <input type="text" name="username" id="username">
+            </div>
+            <div class="input-group">
+                <label for="">密码</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <div class="input-group">
+                <label for="">密码确认</label>
+                <input type="password" id="passwordAgain" name="passwordAgain">
+            </div>
+            <div class="input-group">
+                <label for="">邮箱</label>
+                <input type="text" id="email" name="email">
+            </div>
+            <div class="input-group">
+                <label for="">手机</label>
+                <input type="text" name="phoneNum" id="phoneNum">
+            </div>
+            <div class="input-group">
+                <button type="submit" id="submitBtn" class="btn btn-primary">提交</button>
+                <button type="reset" id="resetBtn" class="btn">重置</button>
+            </div>
+        </form>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="../js/myValidator.js"></script>
+    <script type="text/javascript">
+    var opts = {
+        btnReset: '#resetBtn',
+        tipType: 1,
+        enableBlurValid: true,
+        showAllErrorMsg: true,
+        beforeSubmit: function($form, validResult) {
+            if (!validResult) {
+                console.log('验证不通过！');
+                alert('验证不通过！');
+            }
+        },
+        strategies: [{
+            selector: '#username',
+            rules: [{
+                rule: 'required',
+                errorMsg: '名称不能为空'
+            }, {
+                rule: 'minLength',
+                args: [4],
+                errorMsg: '名称长度不能小于4'
+            }, {
+                rule: 'maxLength',
+                args: [16],
+                errorMsg: '名称长度不能大于16'
+            }],
+            correctMsg: '名称可用',
+            tipMsg: '必填，名称长度为4到16个字符',
+
+        }, {
+            selector: '#password',
+            rules: [{
+                rule: 'required',
+                errorMsg: '密码不能为空'
+            }, ],
+            correctMsg: '密码可用',
+            tipMsg: '请输入密码',
+
+        }, {
+            selector: '#passwordAgain',
+            rules: [{
+                rule: 'same',
+                args: ['#password'],
+                errorMsg: '两次密码输入不一致'
+            }, ],
+            correctMsg: '两次密码输入一致',
+            tipMsg: '再次输入密码',
+
+        }, {
+            selector: '#email',
+            rules: [{
+                rule: 'email',
+                errorMsg: '邮箱格式不正确'
+            }, {
+                rule: 'custom',
+                args: [/.*@163.com$/],
+                errorMsg: '需要为163邮箱'
+            }],
+            correctMsg: '邮箱格式正确',
+            tipMsg: '请输入邮箱',
+
+        }, {
+            selector: '#phoneNum',
+            rules: [{
+                rule: 'phoneNum',
+                errorMsg: '电话号码格式不正确'
+            }, ],
+            correctMsg: '电话号码格式正确',
+            tipMsg: '请输入电话号码',
+        }]
+    };
+    $('#myForm').myValidator(opts);
+    </script>
+</body>
+
+</html>

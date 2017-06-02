@@ -1,0 +1,84 @@
+/*针对时间轴的布局*/
+
+html,
+body {
+    height: 100%;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.timeline-wrapper {
+    width: 100%;
+    padding: 0 5%;
+    height: 100%;
+}
+
+.mytimeline-list {
+    width: 100%;
+    overflow: hidden;
+    background-color: rgba(89, 23, 14, .2);
+    position: relative;
+    overflow: hidden;
+}
+
+.mytimeline-list:after {
+    content: '';
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    position: absolute;
+    left: 50%;
+    background-color: #00B6DD;
+}
+
+.mytimeline-item {
+    overflow: hidden;
+    width: 100%;
+    padding: 15px 0;
+}
+
+.mytimeline-item-leftContent {
+    float: left;
+    width: 50%;
+    background-color: red;
+    border: 1px solid #000;
+    transform: translate3d(-50px, 0, 0);
+    transition: all 700ms ease-in-out 700ms;
+}
+
+.mytimeline-item-rightContent {
+    float: right;
+    width: 50%;
+    background-color: green;
+    border: 1px solid #000;
+    transform: translate3d(50px, 0, 0);
+    transition: all 700ms ease-in-out 700ms;
+}
+
+.mytimeline-list.active .mytimeline-item-leftContent,
+.mytimeline-list.active .mytimeline-item-rightContent {
+    transform: translate3d(0, 0, 0);
+}
+
+@media (max-width: 992px) {
+    .mytimeline-list:after {
+        left: 25px;
+    }
+    .mytimeline-item-leftContent,
+    .mytimeline-item-rightContent {
+        width: 90%;
+        /*需要使用js代码控制*/
+        margin-left: 50px;
+        float: none;
+        transform: translate3d(50px, 0, 0);*/
+    }
+    .mytimeline-item-content+.mytimeline-item-content {
+        margin-top: 30px;
+    }
+}

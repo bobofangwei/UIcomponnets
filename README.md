@@ -1,3 +1,12 @@
 # UIcomponnets
-常见的ui组件的封装  
-效果预览地址:https://bobofangwei.github.io/UIcomponnets/[pathName]
+根据组件化的工程思想，探究常见组件背后的技术原理，基于原生javascript或者jQuery等基础类库，逐行实现常见的ui组件的封装    
+包括：　　
+1. 全屏滚动组件
+2. 分页组件
+3. 日历组件
+4. 树形菜单组件
+5. 表单验证组件
+6. 轮播图组件
+
+
+

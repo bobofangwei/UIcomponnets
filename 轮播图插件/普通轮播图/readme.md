@@ -4,7 +4,7 @@
 2. 丰富的配置项
 3. 基于css3实现动画效果
 
-[Demo](https://bobofangwei.github.io/UIcomponnets/%E5%85%A8%E5%B1%8F%E6%BB%9A%E5%8A%A8%E6%8F%92%E4%BB%B6/myfullpage/demo/index.html)
+[Demo](https://bobofangwei.github.io/UIcomponnets/%E8%BD%AE%E6%92%AD%E5%9B%BE%E6%8F%92%E4%BB%B6/%E6%99%AE%E9%80%9A%E8%BD%AE%E6%92%AD%E5%9B%BE/demo/MyCarousel.html)
 
 ## 用法介绍
 ### 依赖文件
